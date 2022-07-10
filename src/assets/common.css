@@ -1,3 +1,18 @@
-body{
-    
+
+
+table{
+    border-collapse: collapse;
+    width: 100%;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+.tabel-heading{
+    font-weight: 800;
+}
+button{
+    padding:8px 25px;
+    color:white;
 }

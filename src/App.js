@@ -4,7 +4,7 @@ import SearchFilter from "./Component/SearchFilter";
 import data from './data.json';
 import { useEffect, useState } from "react";
 import {Grid} from '@mui/material';
-import './assets/common.css';
+import './assets/app.css';
 function App() {
   const [globalCandidateData,setGlobalCandidateData] = useState([...data]);
   const [candidateData,setCandidateData] = useState([...data]);

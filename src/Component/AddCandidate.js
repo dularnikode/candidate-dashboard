@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import data from '../data.json';
 import { 
   TextField,
   Grid,
@@ -103,8 +102,8 @@ function AddCandidate({setGlobalCandidateData}) {
               </RadioGroup>
           </Grid>
           <Grid item xs={6}>
-            <Button onClick={handleAddNewCandidate}>Add</Button>
-            <Button onClick={handleReset}>Reset</Button>
+            <Button onClick={handleAddNewCandidate} className="primary-button">Add</Button>
+            <Button onClick={handleReset} className="secondary-button">Reset</Button>
           </Grid>
         </Grid>
       </Grid>

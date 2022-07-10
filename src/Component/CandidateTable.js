@@ -5,7 +5,7 @@ function CandidateTable({candidateData}) {
         <Grid container maxWidth={'lg'} justifyContent={'center'}>
             <Grid item xs={12} style={{margin:"auto"}}>
                 <Table>
-                    <TableHead>
+                    <TableHead className='tabel-heading'>
                         <TableRow>
                             <TableCell>#</TableCell>
                             <TableCell align="right">First Name</TableCell>
