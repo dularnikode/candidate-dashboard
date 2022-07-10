@@ -1,0 +1,12 @@
+.primary-button{
+    background-color: #40e8de;
+}
+
+.secondary-button{
+    background-color: grey;
+}
+
+.add-candidate-container{
+    margin-top: 15px !important;
+    box-shadow: #00000029 5px 5px 5px 5px;
+}
