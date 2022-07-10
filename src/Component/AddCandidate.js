@@ -7,7 +7,10 @@ import {
   Radio,
   RadioGroup,
   FormControlLabel,
+  FormHelperText,
+  Box
 } from '@mui/material';
+import { getSortedData } from '../utils';
 
 function AddCandidate({setGlobalCandidateData}) {
     const [candidate,setCandidate] = useState({
@@ -16,12 +19,23 @@ function AddCandidate({setGlobalCandidateData}) {
       email:'',
       gender:''
     });
-    // const [candidateformValidation,setCandidateformValidation] = useState({
-    //   first_name:{error:false,message:''},
-    //   last_name:{error:false,message:''},
-    //   email:{error:false,message:''},
-    //   gender:{error:false,message:''}
-    // });
+    const [candidateformValidation,setCandidateformValidation] = useState({
+      first_name:{error:false,message:''},
+      last_name:{error:false,message:''},
+      email:{error:false,message:''},
+      gender:{error:false,message:''}
+    });
+    const validate = (name,value)=>{
+      const validations = {...candidateformValidation};
+      if(value){
+        validations[name].error = false;
+        validations[name].message = "";
+      }else{
+        validations[name].error = true;
+        validations[name].message = "This field is required";
+      }
+      setCandidateformValidation({...validations});
+    }
     const handleDataOnChange = (event) =>{
       const newCandidateData = {...candidate};
       if(event.target.value){
@@ -29,6 +43,7 @@ function AddCandidate({setGlobalCandidateData}) {
       }else{
         newCandidateData[event.target.name] = '';
       }
+      validate(event.target.name,event.target.value);
       setCandidate({...newCandidateData});
     }
     const handleReset = () => {
@@ -38,16 +53,26 @@ function AddCandidate({setGlobalCandidateData}) {
           email:'',
           gender:''
         });
+      setCandidateformValidation({
+        first_name:{error:false,message:''},
+        last_name:{error:false,message:''},
+        email:{error:false,message:''},
+        gender:{error:false,message:''}
+      });
     }
     const handleAddNewCandidate = () => {
-      // check validations
-      setGlobalCandidateData((prevState)=>{
-        const newData = [...prevState];
-        newData.push({...candidate,id:newData.length + 1});
-        return newData;
-      });
-      alert(`New Candidate [${candidate.first_name}] Added SuccessFully !`);
-      handleReset();
+      Object.keys(candidateformValidation).forEach((item)=>validate(item,candidate[item]));
+      const isValidated = Object.keys(candidateformValidation).every((item)=>candidateformValidation[item].error === false);
+      if(isValidated){
+        setGlobalCandidateData((prevState)=>{
+          const newData = [...prevState];
+          newData.push({...candidate,id:newData.length + 1});
+          const sortedData = getSortedData(newData);
+          return sortedData;
+        });
+        alert(`New Candidate [${candidate.first_name}] Added SuccessFully !`);
+        handleReset();
+      }
     }
     return (
       <Grid container spacing={2} maxWidth={'lg'} className="add-candidate-container">
@@ -66,6 +91,8 @@ function AddCandidate({setGlobalCandidateData}) {
               type="text"
               name="first_name"
               variant="standard"
+              error={candidateformValidation.first_name.error}
+              helperText={candidateformValidation.first_name.message}
             />
           </Grid>
           <Grid item xs={6}>
@@ -77,6 +104,8 @@ function AddCandidate({setGlobalCandidateData}) {
               type="text"
               name="last_name"
               variant="standard"
+              error={candidateformValidation.last_name.error}
+              helperText={candidateformValidation.last_name.message}
             />
           </Grid>
         </Grid>
@@ -89,26 +118,33 @@ function AddCandidate({setGlobalCandidateData}) {
             type="email"
             name="email" 
             variant="standard"
+            error={candidateformValidation.email.error}
+            helperText={candidateformValidation.email.message}
           />
         </Grid>
         <Grid item container>
           <Grid item xs={6}>
-              <RadioGroup
-                value={candidate.gender}
-                name='gender'
-                onChange={handleDataOnChange} 
-                sx={{display:'flex',justifyContent:'space-evenly',flexDirection:'row'}}>
-                <FormControlLabel 
-                  label="Male"
-                  control={<Radio />}
-                  value={'Male'}
-                />
-                <FormControlLabel 
-                  label="Female"
-                  control={<Radio />}
-                  value={'Female'}
-                />
-              </RadioGroup>
+            <RadioGroup
+              value={candidate.gender}
+              name='gender'
+              onChange={handleDataOnChange} 
+              sx={{display:'flex',justifyContent:'space-evenly',flexDirection:'row'}}>
+              <FormControlLabel 
+                label="Male"
+                control={<Radio />}
+                value={'Male'}
+              />
+              <FormControlLabel 
+                label="Female"
+                control={<Radio />}
+                value={'Female'}
+              />
+            </RadioGroup>
+            <Box justifyContent={'center'} display={'flex'}>
+              <FormHelperText error={candidateformValidation.gender.error}>
+                {candidateformValidation.gender.message}
+              </FormHelperText>
+            </Box>
           </Grid>
           <Grid item xs={6}>
             <Button onClick={handleAddNewCandidate} className="primary-button">Add</Button>
