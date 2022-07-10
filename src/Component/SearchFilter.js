@@ -43,7 +43,7 @@ function SearchFilter ({candidateData,setCandidateData}){
      *|| item.gender === newSearchParam.female ? 'Female' : ''
     */
     return(
-        <Grid container>
+        <Grid container maxWidth={'lg'}>
             <Grid item xs={6}>
                 <Grid container>
                     <Grid item xs={6}>

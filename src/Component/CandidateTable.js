@@ -1,6 +1,5 @@
 import React from 'react';
 import {Table,TableBody,TableCell,TableHead,TableRow,Grid} from '@mui/material';
-
 function CandidateTable({candidateData}) {
     return (
         <Grid container maxWidth={'lg'} justifyContent={'center'}>
