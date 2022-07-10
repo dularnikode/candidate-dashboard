@@ -5,3 +5,7 @@
 .secondary-button{
     background-color: grey;
 }
+
+.add-candidate-container{
+    margin-top: 15px !important;
+}

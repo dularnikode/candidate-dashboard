@@ -16,6 +16,12 @@ function AddCandidate({setGlobalCandidateData}) {
       email:'',
       gender:''
     });
+    // const [candidateformValidation,setCandidateformValidation] = useState({
+    //   first_name:{error:false,message:''},
+    //   last_name:{error:false,message:''},
+    //   email:{error:false,message:''},
+    //   gender:{error:false,message:''}
+    // });
     const handleDataOnChange = (event) =>{
       const newCandidateData = {...candidate};
       if(event.target.value){
@@ -34,14 +40,17 @@ function AddCandidate({setGlobalCandidateData}) {
         });
     }
     const handleAddNewCandidate = () => {
+      // check validations
       setGlobalCandidateData((prevState)=>{
         const newData = [...prevState];
         newData.push({...candidate,id:newData.length + 1});
         return newData;
       });
+      alert(`New Candidate [${candidate.first_name}] Added SuccessFully !`);
+      handleReset();
     }
     return (
-      <Grid container spacing={2} maxWidth={'lg'}>
+      <Grid container spacing={2} maxWidth={'lg'} className="add-candidate-container">
         <Grid item xs={12} >
           <Typography variant="h4" component={'p'}>
             Add New Candidate
