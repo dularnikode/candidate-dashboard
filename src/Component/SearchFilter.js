@@ -24,13 +24,9 @@ function SearchFilter ({candidateData,setCandidateData}){
             if(newSearchParam.male || newSearchParam.female){
                 data = data.filter((item)=> item.gender === (newSearchParam.male ? 'Male':'') || item.gender === (newSearchParam.female ? 'Female' : ''));
                 if( newSearchParam.searchQuery){
-                    // const newSearchQuery = newSearchParam.searchQuery.toLowerCase(); 
-                    // data = data.filter((item)=>(item.last_name.toLowerCase() === newSearchQuery || item.first_name.toLowerCase() === newSearchQuery || item.email.toLowerCase() === newSearchQuery ) );
                     data = data.filter((item)=>(constainsText(item,newSearchParam.searchQuery,'last_name') || constainsText(item,newSearchParam.searchQuery,'first_name') || constainsText(item,newSearchParam.searchQuery,'email')));
                 }
             }else if(newSearchParam.searchQuery){
-                // const newSearchQuery = newSearchParam.searchQuery.toLowerCase(); 
-                // data = data.filter((item)=>(item.last_name.toLowerCase()  || item.first_name.toLowerCase() === newSearchQuery || item.email.toLowerCase() === newSearchQuery ) );
                 data = data.filter((item)=>(constainsText(item,newSearchParam.searchQuery,'last_name') || constainsText(item,newSearchParam.searchQuery,'first_name') || constainsText(item,newSearchParam.searchQuery,'email')));
             }
             setCandidateData([...data]);
@@ -38,10 +34,6 @@ function SearchFilter ({candidateData,setCandidateData}){
             setCandidateData([...candidateData]);
         }
     }  
-    /**
-     * || (item.last_name.toLowerCase() === newSearchParam.searchQuery.toLowerCase() || item.first_name.toLowerCase() === newSearchParam.searchQuery.toLowerCase() || item.email.toLowerCase() === newSearchParam.searchQuery.toLowerCase())
-     *|| item.gender === newSearchParam.female ? 'Female' : ''
-    */
     return(
         <Grid container maxWidth={'lg'}>
             <Grid item xs={6}>

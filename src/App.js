@@ -5,17 +5,32 @@ import data from './data.json';
 import { useEffect, useState } from "react";
 import {Grid , Typography ,Box} from '@mui/material';
 import { getSortedData } from "./utils";
-import './assets/app.css';
+import './assets/app.scss';
 function App() {
-  const sortedData = getSortedData(data);
-  const [globalCandidateData,setGlobalCandidateData] = useState([...sortedData]);
-  const [candidateData,setCandidateData] = useState([...sortedData]);
+  const [globalCandidateData,setGlobalCandidateData] = useState([]);
+  const [candidateData,setCandidateData] = useState([]);
   useEffect(()=>{
     setCandidateData([...globalCandidateData]);
   },[globalCandidateData]);
+
+  window.onbeforeunload = () => {
+    localStorage.setItem('candidate-data',JSON.stringify(globalCandidateData));
+  };
+  useEffect(()=>{
+    const sortedData = getSortedData(data);
+    const stuData = JSON.parse(localStorage.getItem('candidate-data'));
+    if(stuData && stuData?.length > 0){
+      setGlobalCandidateData([...stuData]);
+      setCandidateData([...stuData]);
+    }else{
+      localStorage.setItem('candidate-data',JSON.stringify(sortedData));
+      setGlobalCandidateData([...sortedData]);
+      setCandidateData([...sortedData]);
+    }
+  },[]);
   return (
     <Grid container justifyContent={'center'}>
-      <Grid conatiner maxWidth={'lg'}>
+      <Grid container maxWidth={'lg'}>
         <Box sx={{width:'100%'}}>
           <Typography variant="h4" component={'p'} textAlign='left'>Candidates</Typography>
         </Box>
