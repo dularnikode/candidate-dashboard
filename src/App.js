@@ -5,7 +5,7 @@ import data from './data.json';
 import { useEffect, useState } from "react";
 import {Grid , Typography ,Box} from '@mui/material';
 import { getSortedData } from "./utils";
-import './assets/app.css';
+import './assets/app.scss';
 function App() {
   const [globalCandidateData,setGlobalCandidateData] = useState([]);
   const [candidateData,setCandidateData] = useState([]);

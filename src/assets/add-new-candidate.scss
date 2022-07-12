@@ -1,0 +1,24 @@
+
+.add-candidate-container{
+    margin-top: 15px !important;
+    box-shadow: #00000029 5px 5px 5px 5px;
+    button{
+        padding:8px 25px;
+        color:white;
+    }
+    .secondary-button{
+        background-color: grey;
+        &:hover{
+            color:white;
+            background-color: grey;
+        }
+    }
+    .primary-button{
+        background-color: #40e8de;
+        margin-right:10px;
+        &:hover{
+            color:white;
+            background-color: #40e8de;
+        }
+    }
+}
